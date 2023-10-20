@@ -1,48 +1,66 @@
-// let computer choose random move (rock/paper/scissors) -> getComputerChoice
-const computerSelection = getComputerChoice()
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     let moves = ["rock", "paper", "scissors"];
-    let randomMove = Math.floor(Math.random() * moves.length);
-    console.log(moves[randomMove]);
-    return moves[randomMove];
+    moves = moves[Math.floor(Math.random() * 3)];
+    return moves
 }
-// ask player for input one of moves: rock/paper/scissors ->  prompt
-let playerSelection = prompt("Is it rock, paper or scissors?", "paper")
-//answers from should always be lowercase
-playerSelection = playerSelection.toLowerCase()
-console.log(playerSelection)
-// play round and compare moves, check who wins 
+
+const computerSelection = getComputerChoice();
+
+function getPlayerChoice() {
+    // ask player for input one of moves: rock/paper/scissors ->  prompt
+    let playerInput = prompt("Is it rock, paper or scissors?", "paper");
+    //answers from should always be lowercase
+    playerInput = playerInput.toLowerCase();
+    return playerInput;
+}
+
+const playerSelection = getPlayerChoice();
+
 function playRound(computerSelection, playerSelection) {
-    let computerScore = 0;
-    let playerScore = 0;
+    let result;
     if (computerSelection === playerSelection) {
-        computerScore = 0;
-        playerScore = 0;
-        console.log("Tie");
-        return [computerScore, playerScore];
+        return result = "tie";
     } else if (computerSelection === "rock" && playerSelection === "scissors"
         || computerSelection === "paper" && playerSelection === "rock"
         || computerSelection === "scissors" && playerSelection === "paper") {
-        computerScore = 1;
-        playerScore = 0;
-        console.log("score for computer")
-        return [computerScore, playerScore];
+        computerScore++;
+        return result = "Computer Win";
     } else if (playerSelection === "rock" && computerSelection === "scissors"
         || playerSelection === "paper" && computerSelection === "rock"
         || playerSelection === "scissors" && computerSelection === "paper") {
-        computerScore = 0;
-        playerScore = 1;
-        console.log("score for human")
-        return [computerScore, playerScore];
+        playerScore++;
+        return result = "Player Win";
     } else {
-        // due to lack of constriction to input, other moves will let computer win
-        computerScore = 1;
-        playerScore = 0;
-        console.log("Wrong Move - Computer Wins!")
-        return [computerScore, playerScore];
-    }
-}
-playRound(computerSelection, playerSelection);
-// return string with text that informs about result
-// play 5 rounds, keep score, tell final result, who won the game. 
 
+        return result = "Wrong Input";
+    }
+
+}
+
+
+function game() {
+
+    for (let round = 1; round <= 5; round++) {
+        const playerSelection = prompt("Is it rock, paper or scissors?", "paper");
+        const computerSelection = getComputerChoice();
+
+        const roundResult = playRound(computerSelection, playerSelection);
+        console.log('Human picks: ' + playerSelection);
+        console.log('Computer picks: ' + computerSelection);
+        console.log('Round ' + round + ': ' + roundResult);
+    }
+
+    if (playerScore > computerScore) {
+        console.log('You win the game! Your Score: ' + playerScore + ' Computer Score: ' + computerScore);
+    } else if (playerScore < computerScore) {
+        console.log('You lose the game! Your Score: ' + playerScore + ' Computer Score: ' + computerScore);
+    } else {
+        console.log('It\'s a tie! Your Score: ' + playerScore + ' Computer Score: ' + computerScore);
+    }
+
+}
+
+game()
