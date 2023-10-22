@@ -1,6 +1,7 @@
 let playerScore = 0;
 let computerScore = 0;
 
+// make computer choose move
 function getComputerChoice() {
     let moves = ["rock", "paper", "scissors"];
     moves = moves[Math.floor(Math.random() * 3)];
@@ -9,6 +10,7 @@ function getComputerChoice() {
 
 const computerSelection = getComputerChoice();
 
+// call user for his move
 function getPlayerChoice() {
     // ask player for input one of moves: rock/paper/scissors ->  prompt
     let playerInput = prompt("Is it rock, paper or scissors?", "paper");
@@ -19,6 +21,7 @@ function getPlayerChoice() {
 
 const playerSelection = getPlayerChoice();
 
+// check who won this round
 function playRound(computerSelection, playerSelection) {
     let result;
     if (computerSelection === playerSelection) {
@@ -40,7 +43,7 @@ function playRound(computerSelection, playerSelection) {
 
 }
 
-
+// five round of game, show score
 function game() {
 
     for (let round = 1; round <= 5; round++) {
